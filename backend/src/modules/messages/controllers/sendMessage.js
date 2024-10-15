@@ -1,5 +1,5 @@
-import conversationModel from "../../conversation/model/conversation.js";
 import controllerError from "../../../helpers/controllerError.js";
+import conversationModel from "../model/conversation.js";
 import messageModel from "../model/message.js";
 
 

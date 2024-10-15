@@ -27,8 +27,7 @@
 ## To run backend properly, setup the `.env` file
 
 ```js
-# 🟢 To run this Linkedin-Clone project & for proper testing... 
-# 🟢 these following values will be required...
+# 🟢 To run this project... these following values will be required...
 
 MONGODB_URI = *******
 
