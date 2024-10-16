@@ -11,17 +11,24 @@ const login = async (req, res) => {
     const { userName, password } = req.body;
 
     try {
+
         // Step 1:- User existence checking... 
         // 🟧🟧🟧🟧🟧🟧🟧🟧🟧🟧🟧🟧🟧🟧
 
         // find user info from mongodb database...
         const existingUser = await userModel.findOne({ userName });
 
+        // if no user exists...
+        if (!existingUser) {
+            return res.status(400).json({ message: "Invalid username or password 🔴" });
+        }
+
         const isPasswordMatch = await bcryptjs.compare(password, existingUser.password);
 
-        // if user || password does not match...
-        if (!existingUser || !isPasswordMatch) return res
-            .status(400).json({ message: "Invalid username or password 🔴" });
+        // if the password does not match...
+        if (!isPasswordMatch) {
+            return res.status(400).json({ message: "Invalid username or password 🔴" });
+        }
 
 
         //  Step 2:- if user & password ok, then process for jwt...
@@ -43,6 +50,8 @@ const login = async (req, res) => {
         res.status(200).json(user);
 
     } catch (error) {
+        console.log(error);
+
         controllerError(res, error, 'login');
     }
 }

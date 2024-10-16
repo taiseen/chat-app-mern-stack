@@ -21,12 +21,25 @@
 [getSms]:       ./backend/src/modules/messages/controllers/getMessage.js
 [sendSms]:      ./backend/src/modules/messages/controllers/sendMessage.js
 
+```
+    ├─── auth
+    │    ├─── register
+    │    ├─── login
+    │    └─── logout
+    │
+    ├─── users
+    │    └─── /
+    │   
+    └─── messages
+        ├─── /:id
+        └─── /send/:id
+```
 
 <br/>
 
 ## To run backend properly, setup the `.env` file
 
-```js
+```jsx
 # 🟢 To run this project... these following values will be required...
 
 MONGODB_URI = *******

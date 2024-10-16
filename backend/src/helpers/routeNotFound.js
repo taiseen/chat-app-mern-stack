@@ -4,7 +4,7 @@ const routeNotFound = (req, res) => {
         error: [
             {
                 path: req.originalUrl,
-                message: 'Api Route Not Found',
+                message: 'Api Route Not Found... 🔴',
             },
         ],
     };
