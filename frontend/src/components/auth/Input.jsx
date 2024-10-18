@@ -1,4 +1,14 @@
-const Input = ({ inputKey, label, type = "text", placeholder, register, required = false, errors, minLength }) => {
+const Input = ({
+    required = false,
+    type = "text",
+    placeholder,
+    minLength,
+    register,
+    inputKey,
+    errors,
+    label,
+}) => {
+
     return (
         <div className="mb-1 flex flex-col gap-1">
             <div>
@@ -10,8 +20,14 @@ const Input = ({ inputKey, label, type = "text", placeholder, register, required
                     id={label}
                     type={type}
                     placeholder={placeholder}
-                    {...register(inputKey, { required, minLength: minLength && { value: minLength, message: `${label} must be at least ${minLength} characters long` } })}
                     className={`w-full input h-10 ${errors[inputKey] ? 'input-error' : 'input-bordered'}`}
+                    {...register(inputKey, {
+                        required,
+                        minLength: minLength && {
+                            value: minLength,
+                            message: `${label} must be at least ${minLength} characters long`
+                        }
+                    })}
                 />
             </div>
 

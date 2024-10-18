@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useAuthContext } from "../context/AuthContext";
-import { login, logout, register } from ".";
+import { login, logout, register, sendMessageByUserId } from ".";
 import toast from "react-hot-toast";
 
 
@@ -36,6 +36,7 @@ export const useLogin = () => {
 
         onSuccess: (serverResponse) => {
             queryClient.invalidateQueries({ queryKey: ['userReg'] });
+
             // to store this multiTab user auth support...
             localStorage.setItem("chat-user", JSON.stringify(serverResponse));
             setAuthUser(serverResponse); // set for globass accessing...
@@ -58,5 +59,19 @@ export const useLogout = () => {
             localStorage.removeItem("chat-user");
             setAuthUser(null);
         }
+    })
+}
+
+
+export const useSendMessageByUserId = () => {
+
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: sendMessageByUserId,
+
+        onSuccess: (_, { receiverId }) => queryClient.invalidateQueries({ queryKey: ['message', receiverId] }),
+
+        onError: (err) => toast.error(err.response.data.error || "Something went wrong")
     })
 }
